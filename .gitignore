@@ -1,6 +1,10 @@
 # Build directory
 /build/
 
+# Cache directories
+.cashe/
+.cache/
+
 # Compiled object files
 *.o
 *.obj
