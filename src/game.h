@@ -12,8 +12,4 @@ typedef struct{
   Level current_level;
 }Game;
 
-void start_game(void);
-void game_loop(Game *game);
-void shut_down_game(Game *game);
-
 #endif

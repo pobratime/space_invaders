@@ -22,6 +22,7 @@ set(SOURCES
     src/player.c
     src/renderer.c
     src/sprite_map.c
+    src/execution.c
 )
 
 # Add the executable target

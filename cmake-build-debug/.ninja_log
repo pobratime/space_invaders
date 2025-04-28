@@ -1,0 +1,10 @@
+# ninja log v6
+1	85	1745845630956775368	CMakeFiles/space_invaders.dir/src/enemy.c.o	1a89a5d08cf4b13c
+7	90	1745845630962623856	CMakeFiles/space_invaders.dir/src/sprite_map.c.o	741f238fcddd79b5
+3	92	1745845630959471737	CMakeFiles/space_invaders.dir/src/game.c.o	17e63427f5c94d7b
+5	92	1745845630960643985	CMakeFiles/space_invaders.dir/src/player.c.o	8ebc7cd2ce523c4f
+5	92	1745845630960483944	CMakeFiles/space_invaders.dir/src/main.c.o	ab902ff8b3de26c3
+4	92	1745845630960119444	CMakeFiles/space_invaders.dir/src/init.c.o	6670c0e83dafcf33
+5	93	1745845630961347400	CMakeFiles/space_invaders.dir/src/renderer.c.o	f13ef7f111759f0d
+4	95	1745845630960328027	CMakeFiles/space_invaders.dir/src/level.c.o	ed4c4cda40577362
+96	141	1745845631051608721	space_invaders	c44fa02ff733d9b7

@@ -1,37 +1,41 @@
 #include "level.h"
 #include "enemy.h"
 #include <stdlib.h>
-#include "sprite_map.h"
 
-Level_list level_list;
+Level level_1;
 
-void generate_level_1(void){
-  level_list.level_1 = malloc(sizeof(Level));
-  
-  if (level_list.level_1 == NULL) {
-      fprintf(stderr, "Failed to allocate memory for level 1\n");
-      return;
-  }
+void update_level_enemies_movement(Level *level, float delta){
 
-  level_list.level_1->level_number = 1;
-  level_list.level_1->enemy_count = 3;
-  
-  level_list.level_1->enemies = malloc(sizeof(Enemy) * level_list.level_1->enemy_count);
-  if (level_list.level_1->enemies == NULL) {
-      fprintf(stderr, "Failed to allocate memory for enemies\n");
-      return;
-  }
+    for(int i = 0; i < level->number_of_enemies; i++){
+        float movement_amount = level->enemies[i].movement.velocity * delta;
+        level->enemies[i].movement.x += movement_amount * level->enemies[i].movement.direction;
+        if(level->enemies[i].movement.x <= 160.0f){
+            level->enemies[i].movement.x = 160.0f;
+            level->enemies[i].movement.direction = 1;
+        }else if(level->enemies[i].movement.x >= 750.0f - 160.0f){
+            level->enemies[i].movement.x = 750.0f - 160.0f;
+            level->enemies[i].movement.direction = -1;
+        }
+    }
 
-  float dx = 200;
-  float dy = 400;
-  for (int i = 0; i < level_list.level_1->enemy_count; i++) {
-      level_list.level_1->enemies[i].x = dx;
-      level_list.level_1->enemies[i].y = dy;
-      level_list.level_1->enemies[i].health_points = 10;
-      level_list.level_1->enemies[i].normal_rect = sprite_map.enemy_1_idle_rect;
-      level_list.level_1->enemies[i].shooting_rect = sprite_map.enemy_1_shooting_rect;
-      level_list.level_1->enemies[i].current_rect = sprite_map.enemy_1_idle_rect;
+}
+void init_level_1(void){
 
-      dx += 100; 
-  }
+    level_1.name = "Level number one";
+    level_1.level_number = 1;
+    level_1.is_boss_level = 0;
+    level_1.number_of_enemies = 3;
+
+    level_1.enemies = malloc(sizeof(Enemy) * 3);
+    if(!level_1.enemies){
+        fprintf(stderr, "Failed to allocate array for enemies in level 1.\n");
+        return;
+    }
+    int dx = 0;
+    for(int i = 0; i < 3; i++){
+        level_1.enemies[i] = init_enemy_1();
+        level_1.enemies[i].movement.x = 200 + dx;
+        level_1.enemies[i].movement.y = 100;
+        dx += 100;
+    }
 }
