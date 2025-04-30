@@ -4,12 +4,6 @@
 #include <SDL3/SDL.h>
 
 typedef struct{
-  SDL_FRect idle_rect;
-  SDL_FRect shooting_rect;
-  SDL_FRect current_rect;
-}EStripes;
-
-typedef struct{
   float x, y;
   float velocity;
   float max_speed;
@@ -20,7 +14,6 @@ typedef struct{
 
 typedef struct{
   float x, y;
-  float velocity_y;
   int active;
   int type;
   SDL_FRect bullet_rect;
@@ -28,16 +21,17 @@ typedef struct{
 
 typedef struct{
   float health_points;
+  float score;
 }EData;
 
 typedef struct{
-  EStripes stripes;
   EBullet bullet;
   EMovemment movement;
   EData data;
 }Enemy;
 
 void init_enemies(void);
+void enemy_shoot(Enemy *enemy);
 Enemy init_enemy_1(void);
 
 #endif

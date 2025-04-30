@@ -1,7 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "enemy.h"
+#include "enemy/enemy.h"
 
 typedef struct{
 
@@ -22,5 +22,6 @@ typedef struct{
 extern Level level_1;
 void init_level_1(void);
 void update_level_enemies_movement(Level *level, float delta);
+void update_level_enemy_bullets(Level *level, float delta);
 
 #endif

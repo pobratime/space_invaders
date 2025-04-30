@@ -1,0 +1,16 @@
+#ifndef GAME_STATES
+#define GAME_STATES
+
+#include "SDL3/SDL.h"
+
+typedef enum{
+  GAME_STATE_WELCOME,
+  GAME_STATE_MENU,
+  GAME_STATE_OPTIONS,
+  GAME_STATE_PLAYING,
+  GAME_STATE_GAME_OVER,
+  GAME_STATE_PAUSED 
+}Game_state;
+
+
+#endif

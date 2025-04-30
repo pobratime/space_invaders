@@ -1,0 +1,14 @@
+#ifndef RENDER_MENU_H
+#define RENDER_MENU_H
+
+#include "SDL3/SDL.h"
+#include "game/game.h"
+
+void render_menu(Game *game);
+
+void render_play_button(Game *game);
+void render_settins_button(Game *game);
+void render_exit_button(Game *game);
+void render_title(Game *game);
+
+#endif

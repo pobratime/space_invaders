@@ -8,28 +8,28 @@ project(SpaceInvaders C)
 set(SDL3_INCLUDE_DIR "/opt/homebrew/opt/sdl3/include")
 set(SDL3_LIBRARY_DIR "/opt/homebrew/opt/sdl3/lib")
 
+# Set SDL3_ttf include and library directories
+set(SDL3_TTF_INCLUDE_DIR "/opt/homebrew/opt/sdl3_ttf/include")
+set(SDL3_TTF_LIBRARY_DIR "/opt/homebrew/opt/sdl3_ttf/lib")
+
 # Add include directories
 include_directories(${SDL3_INCLUDE_DIR})
+include_directories(${SDL3_TTF_INCLUDE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 # Define source files
-set(SOURCES
-    src/enemy.c
-    src/game.c
-    src/init.c
-    src/level.c
-    src/main.c
-    src/player.c
-    src/renderer.c
-    src/sprite_map.c
-    src/execution.c
+file(GLOB_RECURSE SOURCES 
+    "${CMAKE_SOURCE_DIR}/src/*.c"
 )
 
 # Add the executable target
 add_executable(space_invaders ${SOURCES})
 
-# Link the SDL3 library
-target_link_libraries(space_invaders ${SDL3_LIBRARY_DIR}/libSDL3.dylib)
+# Link the SDL3 and SDL3_ttf libraries
+target_link_libraries(space_invaders 
+    ${SDL3_LIBRARY_DIR}/libSDL3.dylib
+    ${SDL3_TTF_LIBRARY_DIR}/libSDL3_ttf.dylib
+)
 
 # Copy assets to the build directory (uncomment when you have assets)
 # file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})

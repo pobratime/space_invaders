@@ -1,0 +1,4 @@
+#ifndef HANDLE_COLISSIONS_H
+#define HANDLE_COLISSIONS_H
+
+#endif

@@ -1,8 +1,7 @@
 #include "init.h"
-#include "game.h"
 
 // Basic game init function
-int init_game(Game *game){
+int init_game_window_and_renderer(Game *game){
 
   // If any of these fail return 0
   if(!init_window(game) || !init_renderer(game)) return 0;
@@ -13,7 +12,7 @@ int init_game(Game *game){
 // Creating a game window
 int init_window(Game *game){
 
-  game->window = SDL_CreateWindow("Space Invaders", 800, 600, 0);
+  game->window = SDL_CreateWindow("Space Invaders", 1280, 720, SDL_WINDOW_RESIZABLE);
 
   if(game->window == NULL){
     fprintf(stderr, "Error while creating a window: %s\n", SDL_GetError());
