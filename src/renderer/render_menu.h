@@ -2,6 +2,8 @@
 #define RENDER_MENU_H
 
 #include "SDL3/SDL.h"
+#include "SDL3_ttf/SDL_ttf.h"
+
 #include "game/game.h"
 
 void render_menu(Game *game);

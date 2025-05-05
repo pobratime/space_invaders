@@ -1,7 +1,9 @@
+#include "game/update/game_update.h"
 #include "execution.h"
 #include "game/update/update_menu_state.h"
 #include "game/game.h"
 #include "game/update/update_playing_state.h"
+#include "game/update/update_pause_state.h"
 
 void update_game(Game *game, float delta_time, SDL_Scancode pressed_key) {
 
@@ -15,6 +17,7 @@ void update_game(Game *game, float delta_time, SDL_Scancode pressed_key) {
     break;
   }
   case (GAME_STATE_PAUSED): {
+    handle_paused_state(game, delta_time, pressed_key);
     break;
   }
   case (GAME_STATE_OPTIONS): {

@@ -24,7 +24,7 @@ void render_game(Game *game) {
     break;
   }
   case (GAME_STATE_PAUSED): {
-    // render_pause(game);
+    render_pause(game);
     break;
   }
   case (GAME_STATE_OPTIONS): {

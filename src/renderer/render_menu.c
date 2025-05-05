@@ -1,5 +1,6 @@
 #include "render_menu.h"
 #include "assets/assets.h"
+#include <_string.h>
 
 void render_menu(Game *game){
 
@@ -46,13 +47,24 @@ void render_exit_button(Game *game){
 }
 
 void render_title(Game *game){
+
   SDL_FRect rect = {
-    300.0f, 230.0f, 300.0f, 300.0f
+    160.0f, 120.0f, 300.0f, 200.0f
   };
   SDL_RenderTexture(
     game->renderer,
-    assets.enemy.bmp_file,
-    &assets.enemy.boss.boss_1,
+    assets.ttf.space,
+    NULL,
     &rect
+  );
+
+  SDL_FRect rect_2 = {
+    160.0f, 340.0f, 500.0f, 200.0f
+  };
+  SDL_RenderTexture(
+    game->renderer,
+    assets.ttf.invaders,
+    NULL,
+    &rect_2
   );
 }

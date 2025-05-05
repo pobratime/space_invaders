@@ -1,6 +1,7 @@
 #include "update_playing_state.h"
 #include "SDL3/SDL.h"
 #include "assets/assets.h"
+#include "game/game_states.h"
 #include "stdlib.h"
 
 void handle_playing_state(Game *game, float delta_time, SDL_Scancode pressed_key){
@@ -19,6 +20,10 @@ void handle_playing_state(Game *game, float delta_time, SDL_Scancode pressed_key
     }
     case(SDL_SCANCODE_CANCEL):{
       move_player_idle(&game->player);
+      break;
+    }
+    case(SDL_SCANCODE_P):{
+      game->data_dynamic.state = GAME_STATE_PAUSED;
       break;
     }
     default:{

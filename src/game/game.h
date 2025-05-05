@@ -11,6 +11,10 @@ typedef struct{
 }Menu_state;
 
 typedef struct{
+  int current_pause_button;
+}Pause_state;
+
+typedef struct{
   float background_scroll_speed;
   Level *levels;
   unsigned int game_seed;
@@ -28,15 +32,22 @@ typedef struct{
   SDL_FRect settings_button_state;
   SDL_FRect play_button_state;
   SDL_FRect exit_button_state;
+  
+  SDL_FRect resume_button_state;
+  SDL_FRect pause_settings_button_state;
+  SDL_FRect main_menu_button_state;
 
 }Game_data_dynamic;
 
 typedef struct{
   // Main game renderer and window
+  SDL_Window *pause_window;
   SDL_Window *window;
   SDL_Renderer *renderer;
 
+  // Game states
   Menu_state menu_state;
+  Pause_state pause_state;
 
   // Game data
   Game_data_dynamic data_dynamic;

@@ -8,6 +8,7 @@
 #include "projectiles_assets.h"
 #include "background_assets.h"
 #include "miscellaneous_assets.h"
+#include "ttf_assets.h"
 
 typedef struct{
   Enemy_assets enemy;
@@ -16,6 +17,7 @@ typedef struct{
   Projectile_assets projcetiles;
   Background_assets background;
   Misc_assets misc;
+  TTF_assets ttf;
 }Assets;
 
 extern Assets assets;

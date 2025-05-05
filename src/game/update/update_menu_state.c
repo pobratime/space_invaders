@@ -62,3 +62,7 @@ void outlay_selected_button(Game *game){
     default: break;
   }
 }
+
+void blink_buttons(Game *game){
+
+}

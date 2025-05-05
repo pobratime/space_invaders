@@ -1,5 +1,6 @@
 #include "execution.h"
 #include "game/game.h"
+#include "game/game_states.h"
 #include "init.h"
 #include "renderer/renderer.h"
 #include <stdlib.h>
@@ -61,6 +62,9 @@ void game_loop(Game *game) {
           case(SDL_SCANCODE_SPACE):{
             pressed_key = SDL_SCANCODE_SPACE;
             break;
+          }
+          case(SDL_SCANCODE_P):{
+            pressed_key = SDL_SCANCODE_P;
           }
           default:{
             break;
