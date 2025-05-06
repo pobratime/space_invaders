@@ -1,27 +1,32 @@
 #ifndef ASSETS_H
 #define ASSETS_H
 
-#include "SDL3/SDL.h"
-#include "enemy_assets.h"
-#include "ui_assets.h"
-#include "spaceship_assets.h"
-#include "projectiles_assets.h"
 #include "background_assets.h"
+#include "enemy_assets.h"
 #include "miscellaneous_assets.h"
+#include "projectiles_assets.h"
+#include "spaceship_assets.h"
 #include "ttf_assets.h"
+#include "ui_assets.h"
 
-typedef struct{
-  Enemy_assets enemy;
-  Ui_assets ui;
-  Spaceship_assets spaceship;
-  Projectile_assets projcetiles;
-  Background_assets background;
-  Misc_assets misc;
-  TTF_assets ttf;
-}Assets;
+/**
+ * Main assets structure containing all game assets
+ */
+typedef struct {
+  Background_assets background;     /* Background layers and textures */
+  Enemy_assets enemy;               /* Enemy sprites and textures */
+  Misc_assets misc;                 /* Miscellaneous game elements */
+  Projectile_assets projectile;     /* Projectile/bullet sprites */
+  Spaceship_assets spaceship;       /* Player spaceship sprites */
+  TTF_assets ttf;                   /* Text and font assets */
+  Ui_assets ui;                     /* User interface elements */
+} Assets;
 
+/* Global assets instance */
 extern Assets assets;
 
+/* Function declarations */
 void load_assets(SDL_Renderer *renderer);
+void destroy_assets(Assets *assets);
 
-#endif
+#endif /* ASSETS_H */

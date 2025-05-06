@@ -6,5 +6,6 @@
 
 void handle_menu_state(Game *game, float delta_time, SDL_Scancode pressed_key);
 void outlay_selected_button(Game *game);
+void open_url(const char *url);
 
 #endif

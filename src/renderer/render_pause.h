@@ -8,6 +8,6 @@
 void render_pause(Game *game);
 void render_pause_menu(Game *game);
 void render_pause_header(Game *game);
-void update_pause_button_states(Game *game);
+void render_pause_title(Game *game);
 
 #endif

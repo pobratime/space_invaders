@@ -1,15 +1,18 @@
 #include "game/update/game_update.h"
 #include "execution.h"
+#include "game/game_states.h"
 #include "game/update/update_menu_state.h"
 #include "game/game.h"
 #include "game/update/update_playing_state.h"
 #include "game/update/update_pause_state.h"
+#include "game/update/update_settings_state.h"
 
 void update_game(Game *game, float delta_time, SDL_Scancode pressed_key) {
 
   switch (game->data_dynamic.state) {
   case (GAME_STATE_MENU): {
     handle_menu_state(game, delta_time, pressed_key);
+    game->last_state = GAME_STATE_MENU;
     break;
   }
   case (GAME_STATE_PLAYING): {
@@ -18,15 +21,19 @@ void update_game(Game *game, float delta_time, SDL_Scancode pressed_key) {
   }
   case (GAME_STATE_PAUSED): {
     handle_paused_state(game, delta_time, pressed_key);
+    game->last_state = GAME_STATE_PAUSED;
     break;
   }
   case (GAME_STATE_OPTIONS): {
+    handle_settings_state(game, delta_time, pressed_key);
     break;
   }
   case (GAME_STATE_GAME_OVER): {
+    // TOOD
     break;
   }
   case (GAME_STATE_WELCOME): {
+    // TODO
     break;
   }
   }
@@ -36,7 +43,7 @@ void update_game(Game *game, float delta_time, SDL_Scancode pressed_key) {
 
 void update_background(Game *game, float delta_time){
 
-  game->data_dynamic.background_y_level += 50.0f * delta_time;
-  if(game->data_dynamic.background_y_level >= 720.0f) game->data_dynamic.background_y_level = 0.0f;
+  game->data_dynamic.background_y_level += 100.0f * delta_time;
+  if(game->data_dynamic.background_y_level >= 1050.0f) game->data_dynamic.background_y_level = 0.0f;
   
 }

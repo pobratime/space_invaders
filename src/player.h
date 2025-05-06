@@ -20,8 +20,13 @@ typedef struct{
 }Movement;
 
 typedef struct{
+
   float health_points;
   float score;
+
+  SDL_FRect current_player_rect;
+  SDL_FRect current_emission_rect;
+  int current_emission_int;
 }Data;
 
 typedef struct{

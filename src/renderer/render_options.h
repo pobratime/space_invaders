@@ -5,5 +5,9 @@
 #include "game/game.h"
 
 void render_options(Game *game);
+void render_title_options(Game *game);
+void render_resolution_settings(Game *game);
+void render_sound_settings(Game *game);
+void render_return_button(Game *game);
 
 #endif

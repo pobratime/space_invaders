@@ -15,7 +15,8 @@ void start_game(void) {
   init_game_window_and_renderer(&game);
   load_assets(game.renderer); 
   init_game_data(&game);
-
+  create_game(&game);
+  
   // Start a game loop
   game_loop(&game);
 }
@@ -24,13 +25,11 @@ void start_game(void) {
 void game_loop(Game *game) {
 
   SDL_Event event;
-  int running = 1;
-
   Uint64 previous_time = SDL_GetTicks();
   Uint64 current_time;
   float delta_time;
 
-  while (running) {
+  while (game->running) {
     
     current_time = SDL_GetTicks();
     delta_time = (current_time - previous_time) / 1000.0f;
@@ -40,7 +39,7 @@ void game_loop(Game *game) {
 
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_EVENT_QUIT) {
-        running = 0;
+        game->running = 0;
       }else if(event.type == SDL_EVENT_KEY_DOWN){
         switch(event.key.scancode){
           case(SDL_SCANCODE_LEFT):{
@@ -65,6 +64,11 @@ void game_loop(Game *game) {
           }
           case(SDL_SCANCODE_P):{
             pressed_key = SDL_SCANCODE_P;
+            break;
+          }
+          case(SDL_SCANCODE_ESCAPE):{
+            pressed_key = SDL_SCANCODE_ESCAPE;
+            break;
           }
           default:{
             break;
@@ -82,7 +86,7 @@ void game_loop(Game *game) {
     render_game(game);
 
     SDL_RenderPresent(game->renderer);
-    SDL_Delay(16);
+    SDL_Delay(7);
   }
   // shut_down_game(game);
 }

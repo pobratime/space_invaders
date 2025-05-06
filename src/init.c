@@ -12,12 +12,14 @@ int init_game_window_and_renderer(Game *game){
 // Creating a game window
 int init_window(Game *game){
 
-  game->window = SDL_CreateWindow("Space Invaders", 1280.0f, 720.0f, SDL_WINDOW_RESIZABLE);
+  game->window = SDL_CreateWindow("Space Invaders", 1680.0f, 1050.0f, SDL_WINDOW_BORDERLESS);
   if(game->window == NULL){
     fprintf(stderr, "Error while creating a window: %s\n", SDL_GetError());
     return 0;
   }
-  
+
+  game->warning_window = SDL_CreateWindow("Warning!", 400.0f, 200.0f, SDL_WINDOW_POPUP_MENU);
+
   return 1;
 }
 

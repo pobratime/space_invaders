@@ -12,5 +12,7 @@ void render_play_button(Game *game);
 void render_settins_button(Game *game);
 void render_exit_button(Game *game);
 void render_title(Game *game);
+void render_square(Game *game);
+void render_feedback_button(Game *game);
 
 #endif

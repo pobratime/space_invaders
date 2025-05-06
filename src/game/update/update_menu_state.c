@@ -1,31 +1,39 @@
 #include "update_menu_state.h"
+#include "game/game.h"
 #include "game/game_states.h"
 #include "assets/assets.h"
+#include <stdlib.h>
 
 void handle_menu_state(Game *game, float delta_time, SDL_Scancode pressed_key){
 
   switch(pressed_key){
     case(SDL_SCANCODE_DOWN):{
-      game->menu_state.current_menu_button += 1;
-      if(game->menu_state.current_menu_button > 1) game->menu_state.current_menu_button = -1;
+      if(game->menu_data.current_button >= 3) game->menu_data.current_button = 0;
+      else game->menu_data.current_button += 1;
       break;
     }
     case(SDL_SCANCODE_UP):{
-      game->menu_state.current_menu_button -= 1;
-      if(game->menu_state.current_menu_button < -1) game->menu_state.current_menu_button = 1;
+      if(game->menu_data.current_button <= 0) game->menu_data.current_button = 3;
+      else game->menu_data.current_button -= 1;
       break;
     }
     case(SDL_SCANCODE_SPACE):{
-      switch(game->menu_state.current_menu_button){
-        case(-1): 
+      switch(game->menu_data.current_button){
+        case(0): 
+          init_game_data(game);
           game->data_dynamic.state = GAME_STATE_PLAYING;
           break;
-        case(0): 
+        case(1):
+          game->options_data.current_button = 0; 
           game->data_dynamic.state = GAME_STATE_OPTIONS; 
           break;
-        case(1): 
-          // TODO
-        break;
+        case(2): 
+          game->running = 0;
+          break;
+        case(3):{
+          open_url("https://github.com/pobratime/space_invaders/issues");
+          break;
+        }
         default: 
           break;
       }
@@ -40,29 +48,47 @@ void handle_menu_state(Game *game, float delta_time, SDL_Scancode pressed_key){
 }
 
 void outlay_selected_button(Game *game){
-  switch(game->menu_state.current_menu_button){
-    case(-1):{
-      game->data_dynamic.settings_button_state = assets.ui.settings_button.idle;
-      game->data_dynamic.play_button_state = assets.ui.play_button.selected;
-      game->data_dynamic.exit_button_state = assets.ui.exit_button.idle;
-      break; 
-    }
+  
+  game->menu_data.settings_button_state = assets.ui.settings_button.idle;
+  game->menu_data.play_button_state = assets.ui.play_button.idle;
+  game->menu_data.exit_button_state = assets.ui.exit_button.idle;
+  game->menu_data.feedback_button_state = assets.ui.feedback_button.idle;
+
+  switch(game->menu_data.current_button){
     case(0):{
-      game->data_dynamic.settings_button_state = assets.ui.settings_button.selected;
-      game->data_dynamic.play_button_state = assets.ui.play_button.idle;
-      game->data_dynamic.exit_button_state = assets.ui.exit_button.idle;
-      break; 
-    }
-    case(1):{
-      game->data_dynamic.settings_button_state = assets.ui.settings_button.idle;
-      game->data_dynamic.play_button_state = assets.ui.play_button.idle;
-      game->data_dynamic.exit_button_state = assets.ui.exit_button.selected;
+      game->menu_data.play_button_state = assets.ui.play_button.selected; 
       break;
     }
-    default: break;
+    case(1):{
+      game->menu_data.settings_button_state = assets.ui.settings_button.selected;
+      break; 
+    }
+    case(2):{
+      game->menu_data.exit_button_state = assets.ui.exit_button.selected;
+      break; 
+    }
+    case(3):{
+      game->menu_data.feedback_button_state = assets.ui.feedback_button.selected;
+      break;
+    }
+    default: 
+      break;
   }
 }
 
-void blink_buttons(Game *game){
-
+void open_url(const char *url) {
+  #ifdef _WIN32
+      char command[256];
+      snprintf(command, sizeof(command), "start %s", url);
+      system(command);
+  #elif __APPLE__
+      char command[256];
+      snprintf(command, sizeof(command), "open %s", url);
+      system(command);
+  #elif __linux__
+      char command[256];
+      snprintf(command, sizeof(command), "xdg-open %s", url);
+      system(command);
+  #else
+  #endif
 }

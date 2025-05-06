@@ -23,6 +23,7 @@ void handle_playing_state(Game *game, float delta_time, SDL_Scancode pressed_key
       break;
     }
     case(SDL_SCANCODE_P):{
+      game->options_data.current_button = -1;
       game->data_dynamic.state = GAME_STATE_PAUSED;
       break;
     }
@@ -39,40 +40,24 @@ void update_player_emission(Game *game, float delta_time){
   static float emission_timer = 0.0f;
   emission_timer += delta_time;
 
-  if (emission_timer >= 0.2f) { // every 0.5 seconds
-    int random_index = rand() % 4;
+  if (emission_timer >= 0.3f) { // every 0.3 seconds
 
-    switch (random_index) {
-      case 0:
-        game->data_dynamic.current_emission_1 = assets.misc.emission_ship_1.em_1;
+    switch (game->player.data.current_emission_int) {
+      case (3):{
+        game->player.data.current_emission_rect = assets.misc.emission_ship_1.em_1;
+        game->player.data.current_emission_int = 1;
         break;
-      case 1:
-        game->data_dynamic.current_emission_1 = assets.misc.emission_ship_1.em_2;
+      }
+      case (1):{
+        game->player.data.current_emission_rect = assets.misc.emission_ship_1.em_2;
+        game->player.data.current_emission_int = 2;
         break;
-      case 2:
-        game->data_dynamic.current_emission_1 = assets.misc.emission_ship_1.em_3;
+      }
+      case (2):{
+        game->player.data.current_emission_rect = assets.misc.emission_ship_1.em_3;
+        game->player.data.current_emission_int = 3;
         break;
-      case 3:
-        game->data_dynamic.current_emission_1 = assets.misc.emission_ship_1.em_4;
-        break;
-    }
-  }
-  if (emission_timer >= 0.2f) { // every 0.5 seconds
-    int random_index = rand() % 4;
-
-    switch (random_index) {
-      case 0:
-        game->data_dynamic.current_emission_2 = assets.misc.emission_ship_1.em_1;
-        break;
-      case 1:
-        game->data_dynamic.current_emission_2 = assets.misc.emission_ship_1.em_2;
-        break;
-      case 2:
-        game->data_dynamic.current_emission_2 = assets.misc.emission_ship_1.em_3;
-        break;
-      case 3:
-        game->data_dynamic.current_emission_2 = assets.misc.emission_ship_1.em_4;
-        break;
+      }
     }
 
     emission_timer = 0.0f;
@@ -89,16 +74,16 @@ void update_player_movement(Game *game, float delta_time){
   // }
 
   if(game->player.movement.velocity_x > 5.0f){
-    game->data_dynamic.current_player_rect = assets.spaceship.spaceship_1.steering_right;
+    game->player.data.current_player_rect = assets.spaceship.spaceship_1.steering_right;
   }else if(game->player.movement.velocity_x < -5.0f){
-    game->data_dynamic.current_player_rect = assets.spaceship.spaceship_1.steering_left;
+    game->player.data.current_player_rect = assets.spaceship.spaceship_1.steering_left;
   }else{
-    game->data_dynamic.current_player_rect = assets.spaceship.spaceship_1.idle;
+    game->player.data.current_player_rect = assets.spaceship.spaceship_1.idle;
   }
 
   // Bound check to ensure player doesn't go off bounds
-  if(game->player.movement.x < 280) game->player.movement.x = 280;
-  if(game->player.movement.x > 1000) game->player.movement.x = 1000;
+  if(game->player.movement.x < 100) game->player.movement.x = 100;
+  if(game->player.movement.x > 1550) game->player.movement.x = 1550;
 }
 
 void move_player_left(Player *player){
