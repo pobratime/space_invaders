@@ -6,7 +6,7 @@
 void init_player(Player *player){
 
   // Setting bullet
-  player->bullet.active = 0;
+  // player->bullet.active = 0;
 
   // Setting player movement
   player->movement.x = 825;
@@ -28,33 +28,3 @@ void init_player(Player *player){
 
 // This function is used to have a smooth player movemment
 // It uses delta_time to smooth out the movement animation transition when switich from left to right etc
-
-
-// FUNCTIONS BELOW ARE BASIC PLAYER FUNCTIONS WHICH CONTROL THE PLAYER'S BEHAVIOUR
-
-void update_player_bullet(Player *player, float delta){
-  if(!player->bullet.active) return;
-  player->bullet.y -= 400.0f * delta;
-  if(player->bullet.y <= 10) player->bullet.active = 0;
-}
-
-void player_move_left(Player *player){
-  player->movement.velocity_x = -player->movement.max_speed;
-  // game->data.current_player_rect = assets.spaceship.spaceship_1.steering_left;
-}
-
-void player_move_right(Player *player){
-  player->movement.velocity_x = player->movement.max_speed;
-  // current_player_rect = assets.spaceship.spaceship_1.steering_right;
-}
-
-void player_idle(Player *player){
-  player->movement.velocity_x = 0.0f;
-  // current_player_rect = assets.spaceship.spaceship_1.idle;
-}
-
-void player_shoot(Player *player){
-  player->bullet.active = 1;
-  player->bullet.x = player->movement.x + 20;
-  player->bullet.y = player->movement.y - 20;
-}

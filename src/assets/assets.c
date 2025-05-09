@@ -5,6 +5,7 @@
 #include "assets/ui_assets.h"
 #include "assets/miscellaneous_assets.h"
 #include "assets/ttf_assets.h"
+#include "assets/sound_assets.h"
 
 /* Global assets variable */
 Assets assets;
@@ -18,6 +19,7 @@ void load_assets(SDL_Renderer *renderer) {
   load_spaceship_assets(renderer, &assets.spaceship);
   load_ttf_assets(renderer, &assets.ttf);
   load_ui_assets(renderer, &assets.ui);
+  load_sound_assets(&assets.audio);
 }
 
 void destroy_assets(Assets *assets) {

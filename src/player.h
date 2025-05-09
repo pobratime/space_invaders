@@ -21,8 +21,8 @@ typedef struct{
 
 typedef struct{
 
-  float health_points;
-  float score;
+  unsigned int health_points;
+  unsigned int score;
 
   SDL_FRect current_player_rect;
   SDL_FRect current_emission_rect;
@@ -30,7 +30,7 @@ typedef struct{
 }Data;
 
 typedef struct{
-  Bullet bullet;
+  Bullet *bullets;
   Movement movement;
   Data data;
 }Player;
@@ -42,7 +42,6 @@ void update_player_bullet(Player *player, float delta);
 void player_move_left(Player *player);
 void player_move_right(Player *player);
 void player_idle(Player *player);
-void player_shoot(Player *player);
 
 
 #endif

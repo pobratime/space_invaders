@@ -10,9 +10,13 @@ void render_playing(Game *game);
 
 void render_player(Game *game);
 void render_player_bullets(Game *game);
+void render_player_1_stats(Game *game);
+
 
 void render_enemies(Game *game);
 void render_enemy_bullets(Game *game);
+
+
 
 void render_ui_elements(Game *game);
 void render_scoreboard(Game *game);

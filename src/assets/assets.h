@@ -1,6 +1,7 @@
 #ifndef ASSETS_H
 #define ASSETS_H
 
+#include "assets/sound_assets.h"
 #include "background_assets.h"
 #include "enemy_assets.h"
 #include "miscellaneous_assets.h"
@@ -20,6 +21,7 @@ typedef struct {
   Spaceship_assets spaceship;       /* Player spaceship sprites */
   TTF_assets ttf;                   /* Text and font assets */
   Ui_assets ui;                     /* User interface elements */
+  Audio_assets audio;
 } Assets;
 
 /* Global assets instance */

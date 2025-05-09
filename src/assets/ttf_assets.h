@@ -9,6 +9,7 @@
  */
 typedef struct {
   TTF_Font *font;          /* Main game font */
+  TTF_Font *font_2;
 
   /* Title textures */
   SDL_Texture *space;      /* "Space" part of the title */

@@ -1,66 +1,81 @@
 #include "update_settings_state.h"
 #include "assets/assets.h"
+#include "assets/ui_assets.h"
+#include "game/update/update_audio.h"
 
-void handle_settings_state(Game *game, float delta_time, SDL_Scancode pressed_key){
+void handle_settings_state(Game *game, float delta_time, bool key_states[]){
 
-  switch(pressed_key){
-    case(SDL_SCANCODE_DOWN):{
+  // Update cooldown timer
+  game->options_data.input_cooldown -= delta_time;
+
+  // Only process input if cooldown has expired
+  if (game->options_data.input_cooldown <= 0.0f) {
+    if(key_states[SDL_SCANCODE_DOWN]){
+      play_button_selection_sound(game, delta_time);
       if(game->options_data.current_button >= 5) game->options_data.current_button = 0;
       else game->options_data.current_button += 1;
-      break;
-    } 
-    case(SDL_SCANCODE_UP):{ 
-      if(game->options_data.current_button <= 0) game->options_data.current_button = 4;
+      game->options_data.input_cooldown = 0.2f; // Set cooldown to prevent rapid changes
+
+    }else if(key_states[SDL_SCANCODE_UP]){
+      play_button_selection_sound(game, delta_time);
+      if(game->options_data.current_button <= 0) game->options_data.current_button = 5;
       else game->options_data.current_button -= 1;
-      break;
-    }
-    case(SDL_SCANCODE_LEFT):{
+      game->options_data.input_cooldown = 0.2f; // Set cooldown to prevent rapid changes
+
+    }else if(key_states[SDL_SCANCODE_LEFT]){
+      game->options_data.input_cooldown = 0.1f; // Shorter cooldown for slider adjustments
       switch(game->options_data.current_button){
         case(0):{
+          play_button_selection_sound(game, delta_time);
           if(game->options_data.sound_level <= 0) game->options_data.sound_level = 0;
-          else game->options_data.sound_level -= 1;
+          else game->options_data.sound_level -= 5;
           break;
         }
         case(1):{
+          play_button_selection_sound(game, delta_time);
           if(game->options_data.music_level <= 0) game->options_data.music_level = 0;
-          else game->options_data.music_level -= 1;
+          else game->options_data.music_level -= 5;
           break;
         }
         default: break;
       }
-      break;
-    }
-    case(SDL_SCANCODE_RIGHT):{      
+  }else if(key_states[SDL_SCANCODE_RIGHT]){
+      game->options_data.input_cooldown = 0.1f; // Shorter cooldown for slider adjustments
       switch(game->options_data.current_button){
         case(0):{
-          if(game->options_data.sound_level >= 10) game->options_data.sound_level = 10;
-          else game->options_data.sound_level += 1;
+          play_button_selection_sound(game, delta_time);
+          if(game->options_data.sound_level >= 100) game->options_data.sound_level = 100;
+          else game->options_data.sound_level += 5;
           break;
         }
         case(1):{
-          if(game->options_data.music_level >= 10) game->options_data.music_level = 10;
-          else game->options_data.music_level += 1;
+          play_button_selection_sound(game, delta_time);
+          if(game->options_data.music_level >= 100) game->options_data.music_level = 100;
+          else game->options_data.music_level += 5;
           break;
         }
         default: break;
       }
-      break;
-    }
-    case(SDL_SCANCODE_SPACE):{
+  }else if(key_states[SDL_SCANCODE_SPACE]){
+      game->options_data.input_cooldown = 0.2f; // Set cooldown for space key
       switch(game->options_data.current_button){
         case(2):{
+          play_button_clicked_sound(game, delta_time);
           game->options_data.current_resolution_int = 3;
           break;
         }
         case(3):{
+          play_button_clicked_sound(game, delta_time);
           game->options_data.current_resolution_int = 1;
           break;
         }
         case(4):{
+          play_button_clicked_sound(game, delta_time);
           game->options_data.current_resolution_int = 2;
           break;
         }
         case(5):{
+          play_button_clicked_sound(game, delta_time);
           game->menu_data.current_button = 0;
           game->pause_data.current_button = 0;
           game->data_dynamic.state = game->last_state;
@@ -68,10 +83,9 @@ void handle_settings_state(Game *game, float delta_time, SDL_Scancode pressed_ke
         }
         default: break;
       }
-      break;
-    }
-    default: break;
   }
+}
+
   update_settings_buttons(game, delta_time);
 }
 

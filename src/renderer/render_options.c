@@ -160,10 +160,10 @@ void render_sound_settings(Game *game){
     music.x + music.w + 50.0f * scale_x, music.y + music.h / 2.0f, 330.0f * scale_x, 50.0f * scale_y
   };
   SDL_FRect sound_slider = {
-    sound_bar.x + game->options_data.sound_level * 30.0f * scale_x, sound_bar.y - sound_bar.h / 2.0f, 30.0f * scale_x, 70.0f * scale_y 
+    sound_bar.x + game->options_data.sound_level * 3.0f * scale_x, sound_bar.y - sound_bar.h / 2.0f, 30.0f * scale_x, 70.0f * scale_y 
   };
   SDL_FRect music_slider = {
-    music_bar.x + game->options_data.music_level * 30.0f * scale_x, music_bar.y - music_bar.h / 2.0f, 30.0f * scale_x, 70.0f * scale_y 
+    music_bar.x + game->options_data.music_level * 3.0f * scale_x, music_bar.y - music_bar.h / 2.0f, 30.0f * scale_x, 70.0f * scale_y 
   };
 
 

@@ -14,7 +14,12 @@ void load_ttf_assets(SDL_Renderer *renderer, TTF_assets *ttf) {
     fprintf(stderr, "Error loading font file: %s\n", SDL_GetError());
     return;
   }
-  
+  ttf->font_2 = TTF_OpenFont("/Users/lukaajdukovic/Desktop/space_invaders/src/assets_bmp/font_2.ttf", 400);
+  if (ttf->font_2 == NULL) {
+    fprintf(stderr, "Error loading font_2 file: %s\n", SDL_GetError());
+    return;
+  } 
+
   /* Create text textures */
   create_ttf_assets(renderer, ttf);
 }

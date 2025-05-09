@@ -22,9 +22,16 @@ typedef struct{
   SDL_FRect clicked;
 }Button;
 
+typedef struct{
+  SDL_FRect score;
+  SDL_FRect health_point;
+  SDL_FRect health;
+}Board_computer_parts;
+
 typedef struct {
   SDL_Texture *bmp_file;   /* Primary UI texture */
   SDL_Texture *bmp_file_2; /* Secondary UI texture */
+  SDL_Texture *bmp_file_3;
 
   SDL_FRect square_1;      /* First square asset */
   SDL_FRect square_2;      /* Second square asset */
@@ -38,7 +45,9 @@ typedef struct {
   Button settings_button;
   Button play_button;
   Button feedback_button;
-    
+  
+  Board_computer_parts board_computer_parts;
+  
   Box box_1;
   Slider slider;
 } Ui_assets;
@@ -55,6 +64,9 @@ void load_square_assets(Ui_assets *ui);
 void load_pilot_board(Ui_assets *ui);
 void load_feedback_button_assets(Ui_assets *ui);
 
+void load_health_indicator(Ui_assets *ui);
+void load_health_point(Ui_assets *ui);
+void load_score_indicator(Ui_assets *ui);
 
 void load_box_1_checked(Ui_assets *ui);
 void load_box_1_idle(Ui_assets *ui);
@@ -63,4 +75,5 @@ void load_box_1_selected_checked(Ui_assets *ui);
 void load_slider_selected(Ui_assets *ui);
 void load_slider_idle(Ui_assets *ui);
 void load_slider_bar(Ui_assets *ui);
+
 #endif /* UI_ASSETS_H */

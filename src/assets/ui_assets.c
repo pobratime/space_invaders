@@ -5,6 +5,7 @@ void load_ui_assets(SDL_Renderer *renderer, Ui_assets *ui) {
   /* Load the UI bitmaps */
   SDL_Surface *ui_surface = SDL_LoadBMP("/Users/lukaajdukovic/Desktop/space_invaders/src/assets_bmp/ui.bmp");
   SDL_Surface *ui_surface_2 = SDL_LoadBMP("/Users/lukaajdukovic/Desktop/space_invaders/src/assets_bmp/ui_2.bmp");
+  SDL_Surface *ui_surface_3 = SDL_LoadBMP("/Users/lukaajdukovic/Desktop/space_invaders/src/assets_bmp/miscellaneous_2.bmp");
 
   /* Check if surfaces loaded correctly */
   if (ui_surface == NULL) {
@@ -16,11 +17,19 @@ void load_ui_assets(SDL_Renderer *renderer, Ui_assets *ui) {
     fprintf(stderr, "Error loading UI 2 BMP file: %s\n", SDL_GetError());
     SDL_DestroySurface(ui_surface);  /* Clean up first surface if second fails */
     return;
+  }  
+
+  if (ui_surface_3 == NULL) {
+    fprintf(stderr, "Error loading UI 3 BMP file: %s\n", SDL_GetError());
+    SDL_DestroySurface(ui_surface);  /* Clean up first surface if second fails */
+    SDL_DestroySurface(ui_surface_2);  /* Clean up first surface if second fails */
+    return;
   }
 
   /* Create textures from surfaces */
   ui->bmp_file = SDL_CreateTextureFromSurface(renderer, ui_surface);
   ui->bmp_file_2 = SDL_CreateTextureFromSurface(renderer, ui_surface_2);
+  ui->bmp_file_3 = SDL_CreateTextureFromSurface(renderer, ui_surface_3);
 
   /* Check if textures created correctly */
   if (ui->bmp_file == NULL) {
@@ -37,7 +46,16 @@ void load_ui_assets(SDL_Renderer *renderer, Ui_assets *ui) {
     SDL_DestroySurface(ui_surface_2);
     return;
   }
-
+  
+  if (ui->bmp_file_3 == NULL) {
+    fprintf(stderr, "Error creating UI 3 texture: %s\n", SDL_GetError());
+    SDL_DestroyTexture(ui->bmp_file);
+    SDL_DestroyTexture(ui->bmp_file_2);
+    SDL_DestroySurface(ui_surface);
+    SDL_DestroySurface(ui_surface_2);
+    SDL_DestroySurface(ui_surface_3);
+    return;
+  }
   /* Load all UI assets */
   load_play_button_assets(ui);
   load_settings_button_assets(ui);
@@ -56,16 +74,39 @@ void load_ui_assets(SDL_Renderer *renderer, Ui_assets *ui) {
 
   load_feedback_button_assets(ui);
 
+  load_health_indicator(ui);
+  load_health_point(ui);
+  load_score_indicator(ui);
+
   /* Configure texture properties */
   SDL_SetTextureScaleMode(ui->bmp_file, SDL_SCALEMODE_NEAREST);
   SDL_SetTextureBlendMode(ui->bmp_file, SDL_BLENDMODE_BLEND);
 
   SDL_SetTextureScaleMode(ui->bmp_file_2, SDL_SCALEMODE_NEAREST);
   SDL_SetTextureBlendMode(ui->bmp_file_2, SDL_BLENDMODE_BLEND);
+  
+  SDL_SetTextureScaleMode(ui->bmp_file_3, SDL_SCALEMODE_NEAREST);
+  SDL_SetTextureBlendMode(ui->bmp_file_3, SDL_BLENDMODE_BLEND);
 
   /* Clean up surfaces */
   SDL_DestroySurface(ui_surface);
   SDL_DestroySurface(ui_surface_2);
+  SDL_DestroySurface(ui_surface_3);
+}
+
+void load_health_indicator(Ui_assets *ui){
+  SDL_FRect rect = {120.0f, 16.0f, 8.0f, 8.0f};
+  ui->board_computer_parts.health = rect;
+}
+
+void load_health_point(Ui_assets *ui){
+  SDL_FRect rect = {66.0f, 106.0f, 4.0f, 4.0f};
+  ui->board_computer_parts.health_point = rect;
+}
+
+void load_score_indicator(Ui_assets *ui){
+  SDL_FRect rect = {120.0f, 8.0f, 8.0f, 8.0f};
+  ui->board_computer_parts.score = rect;
 }
 
 void load_pilot_board(Ui_assets *ui) {

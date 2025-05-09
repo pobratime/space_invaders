@@ -4,8 +4,9 @@
 #include <SDL3/SDL.h>
 #include "game/game.h"
 
-int init_game_window_and_renderer(Game *game);
-int init_window(Game *game);
-int init_renderer(Game *game);
+void init_game_window_and_renderer(Game *game);
+void init_window(Game *game);
+void init_renderer(Game *game);
+void init_audio(Game *game);
 
 #endif
