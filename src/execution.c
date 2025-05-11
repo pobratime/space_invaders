@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "game/update/game_update.h"
 #include "assets/assets.h" 
+#include "SDL3/SDL.h"
 
 void start_game(void) {
 
@@ -30,11 +31,10 @@ void game_loop(Game *game) {
   Uint64 current_time;
   float delta_time;
 
-  game->music_audio_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &assets.audio.galactic_pulse.spec, NULL, NULL);
-  
-  // Use button clicked audio spec for the sound effects stream
-  // This ensures the sound stream matches the format needed for all sound effects
-  game->sound_audio_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL, NULL, NULL);
+  game->sound_audio_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &assets.audio.galactic_pulse.spec, NULL, NULL);
+  game->music_audio_stream = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &assets.audio.button_selection.spec, NULL, NULL);
+  game->sound_audio_stream_2 = SDL_OpenAudioDeviceStream(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, &assets.audio.laser_gun_classic.spec, NULL, NULL);
+
   // Start the audio stream playback
   if (game->music_audio_stream) {
     SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(game->music_audio_stream));
@@ -47,6 +47,12 @@ void game_loop(Game *game) {
     SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(game->sound_audio_stream));
   } else {
     SDL_Log("Failed to open sound effects audio stream: %s", SDL_GetError());
+  }
+  
+  if (game->sound_audio_stream_2) {
+    SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(game->sound_audio_stream_2));
+  } else {
+    SDL_Log("Failed to open sound effects audio 2 stream: %s", SDL_GetError());
   }
   
   bool key_states[SDL_SCANCODE_COUNT] = {false};

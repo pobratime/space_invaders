@@ -27,7 +27,7 @@ void create_game(Game *game){
   game->options_data.current_resolution_int = 1;
 
   game->options_data.music_level = 25;
-  game->options_data.sound_level = 50;
+  game->options_data.sound_level = 100;
 }
 
 void init_game_data(Game *game){

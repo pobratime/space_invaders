@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 void handle_audio(Game *game, float delta_time){
+
   float volume = (float)game->options_data.music_level / 100.0f;
 
   SDL_AudioDeviceID dev = SDL_GetAudioStreamDevice(game->music_audio_stream);
@@ -12,7 +13,7 @@ void handle_audio(Game *game, float delta_time){
   if(SDL_GetAudioStreamQueued(game->music_audio_stream) < 4096){
     Uint8 *buffer_copy = malloc(assets.audio.galactic_pulse.length);
     for (Uint32 i = 0; i < assets.audio.galactic_pulse.length; i++) {
-      buffer_copy[i] = assets.audio.galactic_pulse.buffer[i]; // Don't multiply by volume here
+      buffer_copy[i] = assets.audio.galactic_pulse.buffer[i]; 
       // dont multiply just make the copy
     }
     SDL_PutAudioStreamData(game->music_audio_stream, buffer_copy, assets.audio.galactic_pulse.length);
@@ -21,12 +22,17 @@ void handle_audio(Game *game, float delta_time){
 }
 
 void play_bullet_sound(Game *game, float delta_time){
+
   float volume = (float)game->options_data.sound_level / 100.0f;
 
-  SDL_AudioDeviceID dev = SDL_GetAudioStreamDevice(game->sound_audio_stream);
+  SDL_AudioDeviceID dev = SDL_GetAudioStreamDevice(game->sound_audio_stream_2);
 
-  SDL_ClearAudioStream(game->sound_audio_stream);
-  SDL_SetAudioStreamGain(game->sound_audio_stream, volume);
+  // to avoid compiler warrnigns
+  (void)dev;
+  (void)delta_time;
+  
+  SDL_ClearAudioStream(game->sound_audio_stream_2);
+  SDL_SetAudioStreamGain(game->sound_audio_stream_2, volume);
 
   // Create a copy of the buffer to avoid modifying the original data
   Uint8 *buffer_copy = malloc(assets.audio.laser_gun_classic.length);
@@ -34,7 +40,7 @@ void play_bullet_sound(Game *game, float delta_time){
     for (Uint32 i = 0; i < assets.audio.laser_gun_classic.length; i++) {
       buffer_copy[i] = assets.audio.laser_gun_classic.buffer[i];
     }
-    SDL_PutAudioStreamData(game->sound_audio_stream, buffer_copy, assets.audio.laser_gun_classic.length);
+    SDL_PutAudioStreamData(game->sound_audio_stream_2, buffer_copy, assets.audio.laser_gun_classic.length);
     free(buffer_copy);
   }
 }
@@ -63,6 +69,7 @@ void play_button_selection_sound(Game *game, float delta_time){
 }
 
 void play_button_clicked_sound(Game *game, float delta_time){
+  
   float volume = (float)game->options_data.sound_level / 100.0f;
 
   SDL_AudioDeviceID dev = SDL_GetAudioStreamDevice(game->sound_audio_stream);

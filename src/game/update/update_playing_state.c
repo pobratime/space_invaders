@@ -88,7 +88,7 @@ void update_player_emission(Game *game, float delta_time){
   static float emission_timer = 0.0f;
   emission_timer += delta_time;
 
-  if (emission_timer >= 0.3f) { // every 0.3 seconds
+  if (emission_timer >= 0.25f) { // every 0.3 seconds
 
     switch (game->player.data.current_emission_int) {
       case (3):{

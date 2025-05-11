@@ -83,6 +83,8 @@ typedef struct{
   SDL_AudioDeviceID audio_dev;
   SDL_AudioStream *music_audio_stream;
   SDL_AudioStream *sound_audio_stream;
+  SDL_AudioStream *sound_audio_stream_2;
+
   // Game data
   Game_data_dynamic data_dynamic;
   Game_data_const data_const;

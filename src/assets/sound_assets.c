@@ -21,6 +21,10 @@ void load_laser_gun_classic_wav(Audio_assets *audio){
     &audio->laser_gun_classic.buffer,
     &audio->laser_gun_classic.length
   );
+  
+  if (audio->laser_gun_classic.buffer == NULL) {
+    SDL_Log("Failed to load laser gun sound: %s", SDL_GetError());
+  }
 
 }
 
@@ -43,7 +47,8 @@ void load_button_selection_wav(Audio_assets *audio){
   
   if (audio->button_selection.buffer == NULL) {
     SDL_Log("Failed to load button selection sound: %s", SDL_GetError());
-  }
+  }  
+
 }
 
 void load_button_clicked_wav(Audio_assets *audio){
