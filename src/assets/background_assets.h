@@ -4,7 +4,10 @@
 #include "SDL3/SDL.h"
 
 typedef struct{
-  SDL_Texture *bmp_file;
+  SDL_Texture *bmp_file_1;
+  SDL_Texture *bmp_file_2;
+  SDL_Texture *bmp_file_3;
+  SDL_Texture *bmp_file_4;
 
   SDL_FRect rect_1;
   SDL_FRect rect_2;

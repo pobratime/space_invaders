@@ -26,8 +26,8 @@ void destroy_assets(Assets *assets) {
   /* Clean up and destroy all texture resources */
   
   /* Background textures */
-  if (assets->background.bmp_file) {
-    SDL_DestroyTexture(assets->background.bmp_file);
+  if (assets->background.bmp_file_1) {
+    SDL_DestroyTexture(assets->background.bmp_file_1);
   }
   
   /* Enemy textures */

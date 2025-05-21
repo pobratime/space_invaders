@@ -71,6 +71,8 @@ typedef struct{
   Game_state state;
   Level current_level;
   float background_y_level;
+  float background_y_level_far;
+  float background_y_level_very_far;
 }Game_data_dynamic;
 
 typedef struct{

@@ -48,4 +48,9 @@ void update_background(Game *game, float delta_time){
   game->data_dynamic.background_y_level += 100.0f * delta_time;
   if(game->data_dynamic.background_y_level >= 1050.0f * game->options_data.y_scale) game->data_dynamic.background_y_level = 0.0f;
   
+  game->data_dynamic.background_y_level_far += 70.0f * delta_time;
+  if(game->data_dynamic.background_y_level >= 1050.0f * game->options_data.y_scale) game->data_dynamic.background_y_level = 0.0f;
+ 
+  game->data_dynamic.background_y_level_very_far += 10.0f * delta_time;
+  if(game->data_dynamic.background_y_level >= 1050.0f * game->options_data.y_scale) game->data_dynamic.background_y_level = 0.0f;
 }

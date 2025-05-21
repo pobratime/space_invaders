@@ -84,14 +84,66 @@ void render_background(Game *game){
 
   SDL_RenderTexture(
     game->renderer,
-    assets.background.bmp_file,
+    assets.background.bmp_file_1,
     &assets.background.rect_1,
     &rect1
   );
   SDL_RenderTexture(
     game->renderer,
-    assets.background.bmp_file,
+    assets.background.bmp_file_1,
     &assets.background.rect_1,
     &rect2
   );
+  
+  SDL_FRect rect1_far = {
+    0.0f,
+    game->data_dynamic.background_y_level_far,
+    1680.0f * scale_x,
+    1050.0f * scale_y
+  };
+  SDL_FRect rect2_far = {
+    0.0f,
+    game->data_dynamic.background_y_level_far - 1050.0f * scale_y,
+    1680.0f * scale_x,
+    1050.0f * scale_y
+  };
+
+  SDL_RenderTexture(
+    game->renderer,
+    assets.background.bmp_file_2,
+    &assets.background.rect_1,
+    &rect1_far
+  );
+  SDL_RenderTexture(
+    game->renderer,
+    assets.background.bmp_file_2,
+    &assets.background.rect_1,
+    &rect2_far
+  );  
+  
+  // SDL_FRect rect1_far_2 = {
+  //   0.0f,
+  //   game->data_dynamic.background_y_level_very_far,
+  //   1680.0f * scale_x,
+  //   1050.0f * scale_y
+  // };
+  // SDL_FRect rect2_far_2 = {
+  //   0.0f,
+  //   game->data_dynamic.background_y_level_very_far - 1050.0f * scale_y,
+  //   1680.0f * scale_x,
+  //   1050.0f * scale_y
+  // };
+
+  // SDL_RenderTexture(
+  //   game->renderer,
+  //   assets.background.bmp_file_3,
+  //   &assets.background.rect_1,
+  //   &rect1_far_2
+  // );
+  // SDL_RenderTexture(
+  //   game->renderer,
+  //   assets.background.bmp_file_3,
+  //   &assets.background.rect_1,
+  //   &rect2_far_2
+  // );
 }
